@@ -8,6 +8,11 @@
   <meta name="description" content="Star Citizen is a living sci-fi universe where you fly ships, run missions, trade, mine, salvage, and explore—solo or with a crew." />
   <meta name="theme-color" content="#070a14" />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Star Citizen" />
+  <meta property="og:description" content="A living sci-fi universe. Fly ships, run missions, trade, mine, salvage, and explore the ’verse." />
+  <meta property="og:type" content="website" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,14 +43,17 @@
       overflow-x:hidden;
       background:transparent;
       position:relative;
+      min-height: 100%;
     }
 
+    /* STATIC BACKGROUND */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       background:var(--bg);
       z-index:-1;
+      transform: translateZ(0);
     }
 
     a{color:inherit;text-decoration:none}
@@ -56,6 +64,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:14px;
       padding:10px 0 18px;
     }
 
@@ -68,14 +77,12 @@
     }
 
     .mark{
-      width:14px;
-      height:14px;
-      border-radius:50%;
+      width:14px;height:14px;border-radius:50%;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       box-shadow:0 0 0 7px rgba(122,167,255,.15);
     }
 
-    .links{display:flex;gap:10px}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
 
     .pill{
       padding:9px 14px;
@@ -85,11 +92,14 @@
       color:var(--muted);
       font-weight:700;
       font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      white-space:nowrap;
     }
-
     .pill:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
 
-    /* Card */
+    /* Cards */
     .card{
       border:1px solid var(--line);
       background:var(--card);
@@ -107,16 +117,17 @@
     }
 
     h1{
-      font-size:44px;
       margin:0 0 10px;
+      font-size:44px;
       line-height:1.05;
       text-shadow:
         0 0 12px rgba(122,167,255,.25),
         0 0 28px rgba(125,255,201,.12);
     }
 
-    h2{margin:0;font-size:22px}
-    h3{margin:10px 0 6px;font-size:18px}
+    @media (max-width:520px){h1{font-size:34px}}
+    h2{font-size:22px;margin:0}
+    h3{font-size:18px;margin:10px 0 6px}
 
     .sub{
       color:var(--muted);
@@ -124,24 +135,67 @@
       margin:0 0 14px;
     }
 
-    /* CTA */
-    .ctaRow{
+    /* Hero detail block */
+    .heroLead{font-size:16px}
+
+    .heroDetails{
       display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
+      gap:16px;
       margin-top:8px;
+      align-items:flex-start;
     }
 
+    .heroDetailsText{
+      flex:1;
+      min-width:280px;
+    }
+
+    .heroStats{
+      width:300px;
+      display:grid;
+      gap:10px;
+    }
+
+    .stat{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:10px 12px;
+    }
+
+    .statLabel{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-family:"Orbitron",system-ui,sans-serif;
+    }
+
+    .statValue{
+      margin-top:4px;
+      font-size:13px;
+      color:var(--text);
+    }
+
+    @media (max-width:960px){
+      .heroDetails{flex-direction:column}
+      .heroStats{width:100%}
+    }
+
+    /* Buttons */
     .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding:12px 16px;
       border-radius:14px;
       font-family:"Orbitron",system-ui,sans-serif;
       letter-spacing:.08em;
       text-transform:uppercase;
       font-weight:900;
-      border:none;
       cursor:pointer;
+      border:1px solid transparent;
+      white-space:nowrap;
     }
 
     .btnPrimary{
@@ -150,13 +204,83 @@
       box-shadow:0 14px 30px rgba(122,167,255,.22);
     }
 
-    .ctaNote{
-      font-size:14px;
-      color:var(--muted);
-      max-width:280px;
+    .btnPrimary:hover{filter:brightness(1.05)}
+
+    /* Attractive CTA bar */
+    .ctaBar{
+      margin-top:14px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      padding:14px;
+      border-radius:18px;
+      position:relative;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
     }
 
-    /* Image */
+    .ctaBar::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(122,167,255,.55), rgba(125,255,201,.35));
+      filter: blur(12px);
+      opacity:.35;
+      z-index:-1;
+    }
+
+    .btnBig{
+      padding:14px 18px;
+      border-radius:16px;
+      box-shadow: 0 16px 34px rgba(122,167,255,.25);
+    }
+
+    .ctaMeta{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:240px;
+    }
+
+    .ctaMetaTitle{
+      font-family:"Orbitron",system-ui,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--text);
+    }
+
+    .ctaMetaText{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+
+    .ctaChips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:2px;
+    }
+
+    .chip{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.18);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    @media (max-width:720px){
+      .ctaBar{flex-direction:column; align-items:stretch}
+      .btnBig{width:100%}
+      .ctaMeta{min-width:unset}
+    }
+
+    /* Referral image */
     .joinImage{
       margin-top:18px;
       border-radius:20px;
@@ -164,12 +288,11 @@
       border:1px solid rgba(255,255,255,.14);
       box-shadow:0 18px 50px rgba(0,0,0,.6);
     }
-
     .joinImage img{width:100%;display:block}
 
-    /* Section title */
+    /* Section Title */
     .sectionTitle{
-      margin:28px 0 12px;
+      margin:28px 0 10px;
       display:flex;
       justify-content:space-between;
       align-items:flex-end;
@@ -180,16 +303,18 @@
       font-size:13px;
     }
 
+    .sectionTitle + .sub{
+      margin-top:6px;
+    }
+
     /* Tiles */
     .tiles{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
+      margin-top:14px;
     }
-
-    @media (max-width:960px){
-      .tiles{grid-template-columns:1fr}
-    }
+    @media (max-width:960px){.tiles{grid-template-columns:1fr}}
 
     .tile{
       position:relative;
@@ -198,22 +323,20 @@
       overflow:hidden;
       border:1px solid var(--line);
       background:var(--card2);
+      box-shadow:0 12px 35px rgba(0,0,0,.45);
       display:flex;
       align-items:flex-end;
-      box-shadow:0 12px 35px rgba(0,0,0,.45);
     }
-
     .tile::before{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;
       background:
         linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.78)),
         var(--img) center/cover no-repeat;
+      transition:transform .35s ease;
     }
-
+    .tile:hover::before{transform:scale(1.08)}
     .tileInner{position:relative;padding:14px}
-
     .tileTag{
       font-family:"Orbitron",system-ui,sans-serif;
       font-size:12px;
@@ -221,11 +344,11 @@
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(0,0,0,.25);
+      display:inline-block;
     }
+    .tile p{color:var(--muted);font-size:14px;margin:0}
 
-    .tile p{margin:0;color:var(--muted);font-size:14px}
-
-    /* Bottom CTA */
+    /* Bottom CTA bubble */
     .bottomCTA{
       margin:30px auto 10px;
       text-align:center;
@@ -236,16 +359,17 @@
     }
 
     .ctaSub{
+      margin:0;
       font-size:14px;
       color:var(--muted);
-      margin:0;
     }
 
+    /* Footer */
     footer{
+      margin:22px 0 6px;
       text-align:center;
-      font-size:12px;
       color:var(--muted);
-      margin-top:20px;
+      font-size:12px;
     }
   </style>
 </head>
@@ -261,7 +385,10 @@
       </div>
 
       <div class="links">
-        <a class="pill" href="https://verseguide.com" target="_blank" rel="noopener">
+        <a class="pill"
+           href="https://verseguide.com"
+           target="_blank"
+           rel="noopener">
           Verse Maps
         </a>
       </div>
@@ -271,27 +398,61 @@
     <section class="card">
       <h1>Star Citizen</h1>
 
-      <p class="sub">
-        A living sci-fi universe where you fly ships, run missions, trade, mine, salvage,
-        and explore—solo or with a crew.
+      <p class="sub heroLead">
+        Star Citizen is a living sci-fi universe where you fly ships, run missions, trade, mine, salvage,
+        and explore—solo or with a crew. Every session can turn into a rescue, a dogfight, a heist,
+        or an “oops” that becomes a story.
       </p>
 
-      <p class="sub">
-        <strong>Current state (Alpha 4.5):</strong> Dawn of Engineering introduces deeper ship systems
-        and long-term gameplay foundations.
-      </p>
+      <div class="heroDetails">
+        <div class="heroDetailsText">
+          <p class="sub" style="margin-bottom:10px;">
+            <strong>Current state (Alpha 4.5):</strong> Dawn of Engineering deepens ship systems and sets the foundation
+            for hands-on engineering gameplay—power, components, damage control, and crew coordination.
+          </p>
 
-      <div class="ctaRow">
-        <a class="btn btnPrimary"
+          <p class="sub" style="margin:0;">
+            Your gameplay loop can be peaceful or chaotic: haul cargo for profit, mine for resources, salvage wrecks,
+            run support rescues, or chase high-risk PvP. The best part is how these loops collide—your “simple delivery”
+            can become someone else’s bounty, rescue, or ambush.
+          </p>
+        </div>
+
+        <div class="heroStats">
+          <div class="stat">
+            <div class="statLabel">Playstyles</div>
+            <div class="statValue">Solo • Crew • Org</div>
+          </div>
+          <div class="stat">
+            <div class="statLabel">Core loops</div>
+            <div class="statValue">Cargo • Mining • Salvage</div>
+          </div>
+          <div class="stat">
+            <div class="statLabel">High stakes</div>
+            <div class="statValue">PvP • Law • Reputation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attractive CTA bar -->
+      <div class="ctaBar">
+        <a class="btn btnPrimary btnBig"
            href="https://www.robertsspaceindustries.com/enlist?referral=STAR-7SVF-G75G"
            target="_blank"
            rel="noopener">
           Enlist with my referral →
         </a>
 
-        <span class="ctaNote">
-          Referral code grants new accounts bonus UEC.
-        </span>
+        <div class="ctaMeta">
+          <div class="ctaMetaTitle">New player bonus</div>
+          <div class="ctaMetaText">Referral code grants new accounts bonus UEC.</div>
+
+          <div class="ctaChips">
+            <span class="chip">Bonus UEC</span>
+            <span class="chip">New account reward</span>
+            <span class="chip">Fast start</span>
+          </div>
+        </div>
       </div>
 
       <div class="joinImage">
@@ -305,6 +466,29 @@
       <span>What you can do in the ’verse</span>
     </div>
 
+    <p class="sub">
+      <strong>Essential Gameplay Loops in Star Citizen</strong><br><br>
+
+      Star Citizen is built around interconnected gameplay loops that let players choose
+      how they live in the ’verse. Whether you prefer calculated risk or chaotic encounters,
+      each loop supports long-term progression, reputation, and emergent storytelling.
+      No two sessions ever play out the same.
+      <br><br>
+
+      Cargo hauling and trading focus on moving goods across star systems, balancing profit
+      against piracy, market shifts, and travel risk. Mining loops revolve around scanning,
+      extracting, and refining valuable resources, while salvaging allows players to reclaim
+      materials from wrecked ships and abandoned hulls.
+      <br><br>
+
+      Combat-oriented loops introduce high-stakes PvP and bounty-driven encounters, where
+      law, reputation, and consequences matter. Exploration invites players to discover
+      locations, anomalies, and stories hidden across planets and space. Medical and rescue
+      gameplay ties everything together, responding to distress calls and turning failures
+      into recovery missions instead of hard stops.
+    </p>
+
+    <!-- Gameplay tiles -->
     <section class="tiles">
       <article class="tile" style="--img:url('assets/cargo.jpg')">
         <div class="tileInner">
