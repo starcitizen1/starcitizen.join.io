@@ -8,6 +8,16 @@
   <meta name="description" content="Star Citizen is a living sci-fi universe where you fly ships, run missions, trade, mine, salvage, and explore—solo or with a crew." />
   <meta name="theme-color" content="#070a14" />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17843548859"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-17843548859');
+  </script>
+
   <!-- Open Graph -->
   <meta property="og:title" content="Star Citizen" />
   <meta property="og:description" content="A living sci-fi universe. Fly ships, run missions, trade, mine, salvage, and explore the ’verse." />
@@ -432,7 +442,8 @@
         <a class="btn btnPrimary btnBig"
            href="https://www.robertsspaceindustries.com/enlist?referral=STAR-7SVF-G75G"
            target="_blank"
-           rel="noopener">
+           rel="noopener"
+           onclick="gtag('event', 'click', {'event_category':'Referral','event_label':'Star Citizen Enlist (Top CTA)','value':1});">
           Enlist with my referral →
         </a>
 
@@ -530,7 +541,8 @@
       <a class="btn btnPrimary"
          href="https://www.robertsspaceindustries.com/enlist?referral=STAR-7SVF-G75G"
          target="_blank"
-         rel="noopener">
+         rel="noopener"
+         onclick="gtag('event', 'click', {'event_category':'Referral','event_label':'Star Citizen Enlist (Bottom CTA)','value':1});">
         Enlist Today
       </a>
 
